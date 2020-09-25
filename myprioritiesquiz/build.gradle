@@ -1,7 +1,7 @@
 buildscript {
 	ext {
-		selenium_java_version = '4.0.0-alpha-6'
-		testng_version = '7.3.0'
+		selenium_java_version = '3.141.59'
+		testng_version = '7.1.0'
 		webdrivermanager_version = '4.2.2'
 	}
 }
