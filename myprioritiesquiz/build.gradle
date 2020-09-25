@@ -1,3 +1,11 @@
+buildscript {
+	ext {
+		selenium_java_version = '4.0.0-alpha-6'
+		testng_version = '7.3.0'
+		webdrivermanager_version = '4.2.2'
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.3.4.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
@@ -17,6 +25,9 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	testImplementation "org.seleniumhq.selenium:selenium-java:$selenium_java_version"
+	testImplementation "org.testng:testng:$testng_version"
+	testImplementation "io.github.bonigarcia:webdrivermanager:$webdrivermanager_version"
 }
 
 test {
