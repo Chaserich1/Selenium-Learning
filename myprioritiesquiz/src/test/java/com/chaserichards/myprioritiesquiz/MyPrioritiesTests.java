@@ -1,6 +1,7 @@
 package com.chaserichards.myprioritiesquiz;
 
 import com.chaserichards.myprioritiesquiz.pages.mypriorities.MyPrioritiesHomePage;
+import com.chaserichards.myprioritiesquiz.webdrivers.DriverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,8 +14,9 @@ public class MyPrioritiesTests {
 
     @BeforeTest
     public void localSetup() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        //Use driver factory to setup a new chrome driver
+        driver = DriverFactory.getWebDriver("chrome");
+
     }
 
     @AfterTest
