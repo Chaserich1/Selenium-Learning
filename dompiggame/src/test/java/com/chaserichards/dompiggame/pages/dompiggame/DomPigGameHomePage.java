@@ -15,7 +15,7 @@ public class DomPigGameHomePage extends BasePage {
         //Path p = Paths.get("index.html");
         //Path folder = p.getParent();
 
-        webDriver.get("C:\\Users\\cnr1103\\GithubRepos\\Selenium-Learning\\dompiggame\\src\\main\\html\\index.html");
+        webDriver.get("C:\\Users\\cnr1103\\GithubRepos\\Selenium-Learning\\dompiggame\\src\\main\\DomPigGameFiles\\index.html");
         return this;
     }
 }
