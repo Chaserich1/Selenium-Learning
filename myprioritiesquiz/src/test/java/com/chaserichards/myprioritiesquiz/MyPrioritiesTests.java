@@ -13,6 +13,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class MyPrioritiesTests {
     protected WebDriver driver;
     private MyPrioritiesHomePage homePage;
@@ -24,7 +26,6 @@ public class MyPrioritiesTests {
         //Use driver factory to setup a new chrome driver
         driver = DriverFactory.getWebDriver("chrome");
         homePage = new MyPrioritiesHomePage(driver);
-        quizPage = new MyPrioritiesQuiz(driver);
     }
 
     @AfterTest
@@ -32,7 +33,7 @@ public class MyPrioritiesTests {
         driver.quit();
     }
 
-    @Test(description = "Test to open the homepage and begin the quiz")
+    @Test(description = "Test to open the homepage and begin the quiz", priority = -1)
     void openHomepageAndBeginQuiz() throws InterruptedException {
         //Arrange
         var expectedURl = "https://mypriorities.edwardjones.com/quiz";
@@ -52,10 +53,12 @@ public class MyPrioritiesTests {
     void chooseOptionsUntilResultsPage() throws InterruptedException {
         //Arrange
         var expectedURL = "https://mypriorities.edwardjones.com/results";
+        quizPage = new MyPrioritiesQuiz(driver);
 
         //Act
         openHomepageAndBeginQuiz();
-        for(var i = 0; i < 26; i++) {
+        //for(var i = 0; i < 26; i++) {
+        while(driver.getCurrentUrl().equals("https://mypriorities.edwardjones.com/quiz")) {
             quizPage.chooseAnswer();
         }
 
@@ -71,8 +74,8 @@ public class MyPrioritiesTests {
     @Test(description = "Test to confirm change previous answer button works")
     void changePreviousAnswerButton() throws InterruptedException {
         //Arrange
-        var randomQuestion = (int) (Math.random() * 26 + 1);
-        System.out.println(randomQuestion);
+        var randomQuestion = ThreadLocalRandom.current().nextInt(1, 26 + 1);
+        quizPage = new MyPrioritiesQuiz(driver);
 
         //Act
         openHomepageAndBeginQuiz();
