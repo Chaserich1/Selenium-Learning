@@ -1,6 +1,7 @@
 package com.chaserichards.myprioritiesquiz;
 
 import com.chaserichards.myprioritiesquiz.pages.mypriorities.MyPrioritiesHomePage;
+import com.chaserichards.myprioritiesquiz.pages.mypriorities.MyPrioritiesQuiz;
 import com.chaserichards.myprioritiesquiz.webdrivers.DriverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -25,15 +26,25 @@ public class MyPrioritiesTests {
     }
 
     @Test
-    void openMyPrioritiesHomePageSuccess() throws InterruptedException {
+    void openHomepageAndBeginQuiz() throws InterruptedException {
 
         var home = new MyPrioritiesHomePage(driver);
         home
-                .navigateToMyPriorHomePage();
+                .navigateToMyPriorHomePage()
+                .beginQuiz();
 
-
-
-        Thread.sleep(5000);
+        Thread.sleep(3000);
     }
+
+    @Test
+    void chooseOptionCardOne() throws InterruptedException {
+        var quizPage = new MyPrioritiesQuiz(driver);
+        openHomepageAndBeginQuiz();
+        quizPage.chooseAnswer();
+
+        Thread.sleep(3000);
+    }
+
+
 }
 
