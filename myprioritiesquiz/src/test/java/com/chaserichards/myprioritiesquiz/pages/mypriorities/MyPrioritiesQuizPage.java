@@ -3,19 +3,33 @@ package com.chaserichards.myprioritiesquiz.pages.mypriorities;
 import com.chaserichards.myprioritiesquiz.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class MyPrioritiesQuiz extends BasePage {
+public class MyPrioritiesQuizPage extends BasePage {
 
-    public MyPrioritiesQuiz(WebDriver webDriver) { super(webDriver); }
+    public MyPrioritiesQuizPage(WebDriver webDriver) { super(webDriver); }
 
-    //Choose a random card on each page of the quiz
-    public MyPrioritiesQuiz chooseAnswer() {
+    //Choose a random card on each page of the quiz until the end if no random value passed in
+    public MyPrioritiesQuizPage chooseAnswer() {
         //Generate random value of either 1 or 2
         var randomAnswer = (Math.random() <= 0.5) ? "one" : "two";
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("value-card-" + randomAnswer))).click();
+        for(var i = 0; i < 26; i++) {
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("value-card-" + randomAnswer))).click();
+        }
+
+        return this;
+    }
+
+    //Choose a random card on each page of the quiz until random specified question
+    public MyPrioritiesQuizPage chooseAnswer(int randomQuestion) {
+        //Generate random value of either 1 or 2
+        var randomAnswer = (Math.random() <= 0.5) ? "one" : "two";
+
+        for(var i = 0; i < randomQuestion; i++) {
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("value-card-" + randomAnswer))).click();
+        }
+
         return this;
     }
 
@@ -33,8 +47,9 @@ public class MyPrioritiesQuiz extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(By.id("change-previous-button"))).click();
     }
 
-    //Return void because we change to the results page
-    public void resultsPage() {
+    public MyPrioritiesResultsPage goToResultsPage() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ResultsPage")));
+
+        return new MyPrioritiesResultsPage(webDriver);
     }
 }

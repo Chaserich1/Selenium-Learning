@@ -1,13 +1,10 @@
 package com.chaserichards.myprioritiesquiz;
 
 import com.chaserichards.myprioritiesquiz.pages.mypriorities.MyPrioritiesHomePage;
-import com.chaserichards.myprioritiesquiz.pages.mypriorities.MyPrioritiesQuiz;
+import com.chaserichards.myprioritiesquiz.pages.mypriorities.MyPrioritiesQuizPage;
+import com.chaserichards.myprioritiesquiz.pages.mypriorities.MyPrioritiesResultsPage;
 import com.chaserichards.myprioritiesquiz.webdrivers.DriverFactory;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -18,7 +15,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class MyPrioritiesTests {
     protected WebDriver driver;
     private MyPrioritiesHomePage homePage;
-    private MyPrioritiesQuiz quizPage;
+    private MyPrioritiesQuizPage quizPage;
+    private MyPrioritiesResultsPage resultsPage;
 
     @BeforeTest
     public void localSetup() {
@@ -39,8 +37,7 @@ public class MyPrioritiesTests {
         var expectedURl = "https://mypriorities.edwardjones.com/quiz";
 
         //Act
-        homePage
-                .navigateToMyPriorHomePage()
+        homePage.navigateToMyPriorHomePage()
                 .beginQuiz();
 
         //Assert
@@ -53,17 +50,15 @@ public class MyPrioritiesTests {
     void chooseOptionsUntilResultsPage() throws InterruptedException {
         //Arrange
         var expectedURL = "https://mypriorities.edwardjones.com/results";
-        quizPage = new MyPrioritiesQuiz(driver);
 
         //Act
-        openHomepageAndBeginQuiz();
-        //for(var i = 0; i < 26; i++) {
-        while(driver.getCurrentUrl().equals("https://mypriorities.edwardjones.com/quiz")) {
-            quizPage.chooseAnswer();
-        }
-
-        //Wait for the page the results page to load
-        quizPage.resultsPage();
+        homePage
+                .navigateToMyPriorHomePage()
+                .beginQuiz()
+                .goToQuizPage()
+                .chooseAnswer()
+                .goToResultsPage()
+                .onResultsPage();
 
         //Assert
         Assert.assertEquals(driver.getCurrentUrl(), expectedURL);
@@ -74,19 +69,18 @@ public class MyPrioritiesTests {
     @Test(description = "Test to confirm change previous answer button works")
     void changePreviousAnswerButton() throws InterruptedException {
         //Arrange
-        var randomQuestion = ThreadLocalRandom.current().nextInt(1, 26 + 1);
-        quizPage = new MyPrioritiesQuiz(driver);
+        var randomQuestion = ThreadLocalRandom.current().nextInt(1, 25 + 1);
 
         //Act
-        openHomepageAndBeginQuiz();
-        for(var i = 0; i < randomQuestion; i++) {
-            quizPage.chooseAnswer();
-        }
+        homePage
+                .navigateToMyPriorHomePage()
+                .beginQuiz()
+                .goToQuizPage()
+                .chooseAnswer(randomQuestion);
 
         /* Store the expected cards, choose an answer to move to next question,
            click the change previous answer button, store the actual cards. This
            works but needs to be refactored and cleaned up. */
-        Thread.sleep(2000);
         String[] expectedCards = quizPage.storeCurrentCards();
         quizPage.chooseAnswer();
         quizPage.changePreviousAnswer();

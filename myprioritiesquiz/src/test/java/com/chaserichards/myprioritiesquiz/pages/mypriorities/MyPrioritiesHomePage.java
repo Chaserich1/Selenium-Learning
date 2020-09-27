@@ -17,7 +17,15 @@ public class MyPrioritiesHomePage extends BasePage {
     }
 
     //Return void because this will take us to the quiz page which will be a separate class
-    public void beginQuiz() {
+    public MyPrioritiesHomePage beginQuiz() {
         wait.until(ExpectedConditions.elementToBeClickable(By.id("get-started-button"))).click();
+        return this;
     }
+
+    public MyPrioritiesQuizPage goToQuizPage() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("quizPage")));
+
+        return new MyPrioritiesQuizPage(webDriver);
+    }
+
 }
