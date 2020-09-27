@@ -3,11 +3,13 @@ package com.daugherty.seleniumplayground;
 import com.daugherty.seleniumplayground.api.trello.TrelloApi;
 import com.daugherty.seleniumplayground.pages.trello.TrelloHomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.time.LocalDateTime;
@@ -54,6 +56,25 @@ public class TrelloTests {
     @Test
     void uiCanDeleteTrelloBoard() throws InterruptedException {
 
+    }
+
+    @DataProvider
+    protected Object[][] invalidEmailDataProvider() {
+        return new Object[][] {
+                {""},
+                {"Chase@gmail.com"},
+                {"Chasegmail.com"}
+        };
+    }
+
+    @Test(dataProvider = "invalidEmailDataProvider")
+    public void failedLoginWithInvalidId(String invalidLoginId) throws InterruptedException {
+        trelloHomePage.login(invalidLoginId);
+
+        //Post Login attempt, if the url is still equal to the login page then trello successfully denied the login
+        String loggedInURl = "https://trello.com/login";
+        String currentURL = driver.getCurrentUrl();
+        Assert.assertEquals(loggedInURl, currentURL);
     }
 
 

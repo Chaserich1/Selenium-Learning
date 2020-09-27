@@ -30,6 +30,16 @@ public class TrelloHomePage extends BasePage {
         return this;
     }
 
+    public TrelloHomePage login(String invalidLoginId) {
+        String expectedURL = "https://trello.com/login";
+        webDriver.navigate().to(expectedURL);
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("user"))).sendKeys(invalidLoginId);
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("password"))).sendKeys(loginPassword);
+        webDriver.findElement(By.id("login")).click();
+
+        return this;
+    }
+
     public TrelloBoardsPage goToBoards() {
         wait.until(ExpectedConditions.titleContains("Boards | Trello"));
 
