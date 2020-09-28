@@ -3,6 +3,7 @@ buildscript {
 		selenium_java_version = '3.141.59'
 		testng_version = '7.1.0'
 		webdrivermanager_version = '4.2.2'
+		hamcrest_version = '2.2'
 	}
 }
 
@@ -29,6 +30,7 @@ dependencies {
 	testImplementation "org.seleniumhq.selenium:selenium-java:$selenium_java_version"
 	testImplementation "org.testng:testng:$testng_version"
 	testImplementation "io.github.bonigarcia:webdrivermanager:$webdrivermanager_version"
+
 }
 
 test {

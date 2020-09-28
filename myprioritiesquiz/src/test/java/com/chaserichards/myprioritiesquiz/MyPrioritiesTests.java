@@ -10,6 +10,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MyPrioritiesTests {
@@ -70,24 +72,22 @@ public class MyPrioritiesTests {
     void changePreviousAnswerButton() throws InterruptedException {
         //Arrange
         var randomQuestion = ThreadLocalRandom.current().nextInt(1, 25 + 1);
+        List<String> cardList;
 
         //Act
-        homePage
+        cardList = homePage
                 .navigateToMyPriorHomePage()
                 .beginQuiz()
                 .goToQuizPage()
-                .chooseAnswer(randomQuestion);
-
-        /* Store the expected cards, choose an answer to move to next question,
-           click the change previous answer button, store the actual cards. This
-           works but needs to be refactored and cleaned up. */
-        String[] expectedCards = quizPage.storeCurrentCards();
-        quizPage.chooseAnswer();
-        quizPage.changePreviousAnswer();
-        String[] actualCards = quizPage.storeCurrentCards();
+                .chooseAnswer(randomQuestion)
+                .storeCurrentCards()
+                .chooseAnswer(1)
+                .changePreviousAnswer()
+                .storeCurrentCards()
+                .returnCardList();
 
         //Assert
-        Assert.assertEquals(actualCards, expectedCards);
+        Assert.assertTrue(cardList.get(0).equals(cardList.get(2)) && cardList.get(1).equals(cardList.get(3)));
     }
 
 }

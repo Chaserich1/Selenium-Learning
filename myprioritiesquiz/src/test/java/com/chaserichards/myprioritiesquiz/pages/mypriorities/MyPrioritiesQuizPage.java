@@ -5,9 +5,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyPrioritiesQuizPage extends BasePage {
 
     public MyPrioritiesQuizPage(WebDriver webDriver) { super(webDriver); }
+
+    private List<String> cardList = new ArrayList<>();
 
     //Choose a random card on each page of the quiz until the end if no random value passed in
     public MyPrioritiesQuizPage chooseAnswer() {
@@ -27,6 +32,8 @@ public class MyPrioritiesQuizPage extends BasePage {
         var randomAnswer = (Math.random() <= 0.5) ? "one" : "two";
 
         for(var i = 0; i < randomQuestion; i++) {
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("value-card-one")));
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("value-card-two")));
             wait.until(ExpectedConditions.elementToBeClickable(By.id("value-card-" + randomAnswer))).click();
         }
 
@@ -34,22 +41,31 @@ public class MyPrioritiesQuizPage extends BasePage {
     }
 
     //Store and return the current page cards
-    public String[] storeCurrentCards() {
+    public MyPrioritiesQuizPage storeCurrentCards() {
         var expectedCardOne = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("value-card-one"))).getText();
         var expectedCardTwo = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("value-card-two"))).getText();
-        String[] expectedElementArray = {expectedCardOne, expectedCardTwo};
 
-        return expectedElementArray;
+        cardList.add(expectedCardOne);
+        cardList.add(expectedCardTwo);
+        System.out.println(expectedCardOne + "  :  " + expectedCardTwo);
+
+        return this;
     }
 
     //Click change previous answer button
-    public void changePreviousAnswer() {
+    public MyPrioritiesQuizPage changePreviousAnswer() {
         wait.until(ExpectedConditions.elementToBeClickable(By.id("change-previous-button"))).click();
+
+        return this;
     }
 
     public MyPrioritiesResultsPage goToResultsPage() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ResultsPage")));
 
         return new MyPrioritiesResultsPage(webDriver);
+    }
+
+    public List<String> returnCardList() {
+        return cardList;
     }
 }
