@@ -45,7 +45,7 @@ public class MyPrioritiesTests {
         //Assert
         Assert.assertEquals(driver.getCurrentUrl(), expectedURl);
 
-        Thread.sleep(3000);
+        Thread.sleep(2000);
     }
 
     @Test(description = "Test to confirm that a random card (1 or 2) can be selected through the entire quiz and makes it to results page")
@@ -65,7 +65,7 @@ public class MyPrioritiesTests {
         //Assert
         Assert.assertEquals(driver.getCurrentUrl(), expectedURL);
 
-        Thread.sleep(3000);
+        Thread.sleep(2000);
     }
 
     @Test(description = "Test to confirm change previous answer button works")
@@ -84,10 +84,12 @@ public class MyPrioritiesTests {
                 .chooseAnswer(1)
                 .changePreviousAnswer()
                 .storeCurrentCards()
-                .returnCardList();
+                .getCardList();
 
         //Assert
         Assert.assertTrue(cardList.get(0).equals(cardList.get(2)) && cardList.get(1).equals(cardList.get(3)));
+
+        Thread.sleep(2000);
     }
 
 }

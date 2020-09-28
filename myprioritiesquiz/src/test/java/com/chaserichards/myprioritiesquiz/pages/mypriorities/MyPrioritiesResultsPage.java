@@ -9,9 +9,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class MyPrioritiesResultsPage extends BasePage {
     public MyPrioritiesResultsPage(WebDriver webDriver) { super(webDriver); }
 
-    //Return void because we change to the results page
-    public void onResultsPage() {
+    //Return ResultsPage in case we need to do more checks on this page
+    public MyPrioritiesResultsPage onResultsPage() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ResultsPage")));
+        return this;
     }
 
 }

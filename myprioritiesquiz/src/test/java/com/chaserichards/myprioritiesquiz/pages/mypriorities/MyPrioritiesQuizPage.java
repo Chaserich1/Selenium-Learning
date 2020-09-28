@@ -12,15 +12,20 @@ public class MyPrioritiesQuizPage extends BasePage {
 
     public MyPrioritiesQuizPage(WebDriver webDriver) { super(webDriver); }
 
-    private List<String> cardList = new ArrayList<>();
+    private List<String> cardList = new ArrayList<String>();
 
     //Choose a random card on each page of the quiz until the end if no random value passed in
     public MyPrioritiesQuizPage chooseAnswer() {
         //Generate random value of either 1 or 2
         var randomAnswer = (Math.random() <= 0.5) ? "one" : "two";
 
-        for(var i = 0; i < 26; i++) {
-            wait.until(ExpectedConditions.elementToBeClickable(By.id("value-card-" + randomAnswer))).click();
+        while(true) {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(By.id("value-card-" + randomAnswer))).click();
+            } catch (Exception e) {
+                break;
+            }
+
         }
 
         return this;
@@ -41,13 +46,14 @@ public class MyPrioritiesQuizPage extends BasePage {
     }
 
     //Store and return the current page cards
-    public MyPrioritiesQuizPage storeCurrentCards() {
-        var expectedCardOne = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("value-card-one"))).getText();
-        var expectedCardTwo = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("value-card-two"))).getText();
+    public MyPrioritiesQuizPage storeCurrentCards() throws InterruptedException {
+        Thread.sleep(1000);
+        var expectedCardOne = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("value-card-one"))).getText();
+        var expectedCardTwo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("value-card-two"))).getText();
 
         cardList.add(expectedCardOne);
         cardList.add(expectedCardTwo);
-        System.out.println(expectedCardOne + "  :  " + expectedCardTwo);
+        //System.out.println(expectedCardOne + "  :  " + expectedCardTwo);
 
         return this;
     }
@@ -65,7 +71,8 @@ public class MyPrioritiesQuizPage extends BasePage {
         return new MyPrioritiesResultsPage(webDriver);
     }
 
-    public List<String> returnCardList() {
-        return cardList;
+    //Getter for the list of stored cards for testing the previous answer button
+    public List<String> getCardList() {
+        return this.cardList;
     }
 }
