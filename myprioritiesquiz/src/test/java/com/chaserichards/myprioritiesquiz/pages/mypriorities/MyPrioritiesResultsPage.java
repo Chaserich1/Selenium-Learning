@@ -15,4 +15,16 @@ public class MyPrioritiesResultsPage extends BasePage {
         return this;
     }
 
+    //Return void because we will be changing back to the homepage
+    public MyPrioritiesResultsPage restartQuiz() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("restart-button"))).click();
+        return this;
+    }
+
+    public MyPrioritiesHomePage goToHomePage() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("WelcomePage")));
+
+        return new MyPrioritiesHomePage(webDriver);
+    }
+
 }

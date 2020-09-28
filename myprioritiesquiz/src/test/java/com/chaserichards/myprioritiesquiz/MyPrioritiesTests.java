@@ -92,5 +92,26 @@ public class MyPrioritiesTests {
         Thread.sleep(2000);
     }
 
+    @Test(description = "Test to confirm restart quiz button on results page, restarts the quiz")
+    void restartQuizSuccessful() throws InterruptedException {
+        //Arrange
+        var expectedURL = "https://mypriorities.edwardjones.com/";
+
+        //Act
+        homePage
+                .navigateToMyPriorHomePage()
+                .beginQuiz()
+                .goToQuizPage()
+                .chooseAnswer()
+                .goToResultsPage()
+                .onResultsPage()
+                .restartQuiz()
+                .goToHomePage();
+
+        //Assert
+        Assert.assertEquals(driver.getCurrentUrl(), expectedURL);
+
+        Thread.sleep(2000);
+    }
 }
 
