@@ -98,14 +98,12 @@ public class MyPrioritiesTests {
         var expectedURL = "https://mypriorities.edwardjones.com/";
 
         //Act
-        quizPage = homePage
+        homePage
                 .navigateToMyPriorHomePage()
                 .beginQuiz()
-                .goToQuizPage();
-        resultsPage = quizPage
+                .goToQuizPage()
                 .chooseAnswer()
-                .goToResultsPage();
-        resultsPage
+                .goToResultsPage()
                 .onResultsPage()
                 .restartQuiz()
                 .goToHomePage();
