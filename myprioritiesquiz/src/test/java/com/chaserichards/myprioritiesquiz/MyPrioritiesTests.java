@@ -10,15 +10,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MyPrioritiesTests {
     protected WebDriver driver;
     private MyPrioritiesHomePage homePage;
-    private MyPrioritiesQuizPage quizPage;
-    private MyPrioritiesResultsPage resultsPage;
 
     @BeforeTest
     public void localSetup() {
@@ -71,7 +68,7 @@ public class MyPrioritiesTests {
     @Test(description = "Test to confirm change previous answer button works")
     void changePreviousAnswerButton() throws InterruptedException {
         //Arrange
-        var randomQuestion = ThreadLocalRandom.current().nextInt(1, 25 + 1);
+        var randomQuestion = ThreadLocalRandom.current().nextInt(2, 26);
         List<String> cardList;
 
         //Act
@@ -86,7 +83,7 @@ public class MyPrioritiesTests {
                 .storeCurrentCards()
                 .getCardList();
 
-        //Assert
+        //Assert - thinking of ways this could be improved
         Assert.assertTrue(cardList.get(0).equals(cardList.get(2)) && cardList.get(1).equals(cardList.get(3)));
 
         Thread.sleep(2000);

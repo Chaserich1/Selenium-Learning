@@ -6,12 +6,12 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
-    final static int baseWaitTime = 12;
+    final static int timeOutInSeconds = 12;
     final protected WebDriver webDriver;
     final protected WebDriverWait wait;
 
     public BasePage(WebDriver webDriver) {
-        this(webDriver, baseWaitTime);
+        this(webDriver, timeOutInSeconds);
     }
 
     public BasePage(WebDriver webDriver, int maxWaitTimeSeconds) {
@@ -20,11 +20,7 @@ public class BasePage {
     }
 
     protected void waitForLoad() {
-        ExpectedCondition<Boolean> pageLoadCondition = new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver driver) {
-                return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
-            }
-        };
+        ExpectedCondition<Boolean> pageLoadCondition = driver -> ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
         wait.until(pageLoadCondition);
     }
 

@@ -45,7 +45,7 @@ public class MyPrioritiesQuizPage extends BasePage {
         return this;
     }
 
-    //Store and return the current page cards
+    //Store the current cards in our cardList
     public MyPrioritiesQuizPage storeCurrentCards() throws InterruptedException {
         Thread.sleep(1000);
         var expectedCardOne = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("value-card-one"))).getText();
@@ -58,7 +58,7 @@ public class MyPrioritiesQuizPage extends BasePage {
         return this;
     }
 
-    //Click change previous answer button
+    //Click the change previous answer button
     public MyPrioritiesQuizPage changePreviousAnswer() {
         wait.until(ExpectedConditions.elementToBeClickable(By.id("change-previous-button"))).click();
 
