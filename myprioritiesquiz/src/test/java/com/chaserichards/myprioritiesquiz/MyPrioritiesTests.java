@@ -40,7 +40,7 @@ public class MyPrioritiesTests {
                 .beginQuiz();
 
         //Assert
-        Assert.assertEquals(driver.getCurrentUrl(), expectedURl);
+        Assert.assertEquals(expectedURl, driver.getCurrentUrl());
 
         Thread.sleep(2000);
     }
@@ -60,7 +60,7 @@ public class MyPrioritiesTests {
                 .onResultsPage();
 
         //Assert
-        Assert.assertEquals(driver.getCurrentUrl(), expectedURL);
+        Assert.assertEquals(expectedURL, driver.getCurrentUrl());
 
         Thread.sleep(2000);
     }
@@ -106,7 +106,7 @@ public class MyPrioritiesTests {
                 .goToHomePage();
 
         //Assert
-        Assert.assertEquals(driver.getCurrentUrl(), expectedURL);
+        Assert.assertEquals(expectedURL, driver.getCurrentUrl());
 
         Thread.sleep(2000);
     }
