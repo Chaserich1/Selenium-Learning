@@ -48,12 +48,11 @@ public class MyPrioritiesQuizPage extends BasePage {
     //Store the current cards in our cardList
     public MyPrioritiesQuizPage storeCurrentCards() throws InterruptedException {
         Thread.sleep(1000);
-        var expectedCardOne = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("value-card-one"))).getText();
-        var expectedCardTwo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("value-card-two"))).getText();
+        var expectedCardOne = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("value-card-one"))).getAttribute("aria-label");
+        var expectedCardTwo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("value-card-two"))).getAttribute("aria-label");
 
         cardList.add(expectedCardOne);
         cardList.add(expectedCardTwo);
-        //System.out.println(expectedCardOne + "  :  " + expectedCardTwo);
 
         return this;
     }
