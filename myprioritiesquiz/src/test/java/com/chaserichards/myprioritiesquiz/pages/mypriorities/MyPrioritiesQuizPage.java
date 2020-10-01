@@ -3,6 +3,7 @@ package com.chaserichards.myprioritiesquiz.pages.mypriorities;
 import com.chaserichards.myprioritiesquiz.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
@@ -47,18 +48,20 @@ public class MyPrioritiesQuizPage extends BasePage {
 
     //Store the current cards in our cardList
     public MyPrioritiesQuizPage storeCurrentCards() throws InterruptedException {
-        Thread.sleep(1000);
-        var expectedCardOne = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("value-card-one"))).getAttribute("aria-label");
-        var expectedCardTwo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("value-card-two"))).getAttribute("aria-label");
+        Thread.sleep(2000);
+        var expectedCardOne = webDriver.findElement(By.className("value-card-1")).getAttribute("aria-label");
+        var expectedCardTwo = webDriver.findElement(By.className("value-card-2")).getAttribute("aria-label");
 
         cardList.add(expectedCardOne);
         cardList.add(expectedCardTwo);
+        //System.out.println(expectedCardOne + " : " + expectedCardTwo);
 
         return this;
     }
 
     //Click the change previous answer button
-    public MyPrioritiesQuizPage changePreviousAnswer() {
+    public MyPrioritiesQuizPage changePreviousAnswer() throws InterruptedException {
+
         wait.until(ExpectedConditions.elementToBeClickable(By.id("change-previous-button"))).click();
 
         return this;

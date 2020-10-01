@@ -16,12 +16,14 @@ import java.util.concurrent.ThreadLocalRandom;
 public class MyPrioritiesTests {
     protected WebDriver driver;
     private MyPrioritiesHomePage homePage;
+    private MyPrioritiesQuizPage quizPage;
+    private MyPrioritiesResultsPage resultsPage;
 
     @BeforeTest
     public void localSetup() {
         //Arrange
         //Use driver factory to setup a new chrome driver
-        driver = DriverFactory.getWebDriver("chrome");
+        driver = DriverFactory.getWebDriver("firefox");
         homePage = new MyPrioritiesHomePage(driver);
     }
 
@@ -51,13 +53,16 @@ public class MyPrioritiesTests {
         var expectedURL = "https://mypriorities.edwardjones.com/results";
 
         //Act
-        homePage
+        quizPage = homePage
                 .navigateToMyPriorHomePage()
                 .beginQuiz()
-                .goToQuizPage()
+                .goToQuizPage();
+
+        resultsPage = quizPage
                 .chooseAnswer()
-                .goToResultsPage()
-                .onResultsPage();
+                .goToResultsPage();
+
+        resultsPage.onResultsPage();
 
         //Assert
         Assert.assertEquals(expectedURL, driver.getCurrentUrl());
@@ -72,11 +77,11 @@ public class MyPrioritiesTests {
         List<String> cardList;
 
         //Act
-        cardList = homePage
+        quizPage = homePage
                 .navigateToMyPriorHomePage()
                 .beginQuiz()
-                .goToQuizPage()
-                .chooseAnswer(randomQuestion)
+                .goToQuizPage();
+        cardList = quizPage.chooseAnswer(randomQuestion)
                 .storeCurrentCards()
                 .chooseAnswer(1)
                 .changePreviousAnswer()
@@ -95,13 +100,16 @@ public class MyPrioritiesTests {
         var expectedURL = "https://mypriorities.edwardjones.com/";
 
         //Act
-        homePage
+        quizPage = homePage
                 .navigateToMyPriorHomePage()
                 .beginQuiz()
-                .goToQuizPage()
+                .goToQuizPage();
+
+        resultsPage = quizPage
                 .chooseAnswer()
-                .goToResultsPage()
-                .onResultsPage()
+                .goToResultsPage();
+
+        resultsPage.onResultsPage()
                 .restartQuiz()
                 .goToHomePage();
 
