@@ -6,6 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MyPrioritiesResultsPage extends BasePage {
     public MyPrioritiesResultsPage(WebDriver webDriver) { super(webDriver); }
 

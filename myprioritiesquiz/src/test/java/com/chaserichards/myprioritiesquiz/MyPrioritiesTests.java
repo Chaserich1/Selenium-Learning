@@ -10,14 +10,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MyPrioritiesTests {
     protected WebDriver driver;
     private MyPrioritiesHomePage homePage;
-    private MyPrioritiesQuizPage quizPage;
-    private MyPrioritiesResultsPage resultsPage;
 
     @BeforeTest
     public void localSetup() {
@@ -53,16 +52,13 @@ public class MyPrioritiesTests {
         var expectedURL = "https://mypriorities.edwardjones.com/results";
 
         //Act
-        quizPage = homePage
+        homePage
                 .navigateToMyPriorHomePage()
                 .beginQuiz()
-                .goToQuizPage();
-
-        resultsPage = quizPage
+                .goToQuizPage()
                 .chooseAnswer()
-                .goToResultsPage();
-
-        resultsPage.onResultsPage();
+                .goToResultsPage()
+                .onResultsPage();
 
         //Assert
         Assert.assertEquals(expectedURL, driver.getCurrentUrl());
@@ -77,11 +73,11 @@ public class MyPrioritiesTests {
         List<String> cardList;
 
         //Act
-        quizPage = homePage
+        cardList = homePage
                 .navigateToMyPriorHomePage()
                 .beginQuiz()
-                .goToQuizPage();
-        cardList = quizPage.chooseAnswer(randomQuestion)
+                .goToQuizPage()
+                .chooseAnswer(randomQuestion)
                 .storeCurrentCards()
                 .chooseAnswer(1)
                 .changePreviousAnswer()
@@ -100,16 +96,13 @@ public class MyPrioritiesTests {
         var expectedURL = "https://mypriorities.edwardjones.com/";
 
         //Act
-        quizPage = homePage
+        homePage
                 .navigateToMyPriorHomePage()
                 .beginQuiz()
-                .goToQuizPage();
-
-        resultsPage = quizPage
+                .goToQuizPage()
                 .chooseAnswer()
-                .goToResultsPage();
-
-        resultsPage.onResultsPage()
+                .goToResultsPage()
+                .onResultsPage()
                 .restartQuiz()
                 .goToHomePage();
 
@@ -117,6 +110,22 @@ public class MyPrioritiesTests {
         Assert.assertEquals(expectedURL, driver.getCurrentUrl());
 
         Thread.sleep(2000);
+    }
+
+    @Test(description = "Test to check the order of results on result page")
+    void checkTestResultOrder() throws InterruptedException {
+        //Arrange
+        HashMap<String, Integer> selectedAnswers;
+
+        //Act
+        selectedAnswers = homePage
+                .navigateToMyPriorHomePage()
+                .beginQuiz()
+                .goToQuizPage()
+                .chooseAnswer()
+                .getCardSelectionFrequencies();
+        Thread.sleep(2000);
+
     }
 }
 

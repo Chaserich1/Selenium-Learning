@@ -7,13 +7,16 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MyPrioritiesQuizPage extends BasePage {
 
     public MyPrioritiesQuizPage(WebDriver webDriver) { super(webDriver); }
 
     private List<String> cardList = new ArrayList<String>();
+    private HashMap<String, Integer> selectedAnswers = new HashMap<>();
 
     //Choose a random card on each page of the quiz until the end if no random value passed in
     public MyPrioritiesQuizPage chooseAnswer() {
@@ -22,13 +25,15 @@ public class MyPrioritiesQuizPage extends BasePage {
 
         while(true) {
             try {
+                //Get the card text
+                var selectedCardText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("value-card-" + randomAnswer))).getText();
+                //If the key does not exist add it with the value 1, otherwise sum 1 to the value linked to the key (card text)
+                selectedAnswers.merge(selectedCardText, 1, Integer::sum);
                 wait.until(ExpectedConditions.elementToBeClickable(By.id("value-card-" + randomAnswer))).click();
             } catch (Exception e) {
                 break;
             }
-
         }
-
         return this;
     }
 
@@ -76,5 +81,18 @@ public class MyPrioritiesQuizPage extends BasePage {
     //Getter for the list of stored cards for testing the previous answer button
     public List<String> getCardList() {
         return this.cardList;
+    }
+
+    //Getter for the hashmap that stored the selections and number of times they were selected
+    public HashMap<String, Integer> getCardSelectionFrequencies() {
+        for(Map.Entry m : selectedAnswers.entrySet()) {
+            System.out.println(m.getKey() + " " + m.getValue());
+        }
+        return this.selectedAnswers;
+    }
+
+    //Getter for the hashmap of selected answers
+    public HashMap<String, Integer> getSelectedAnswers() {
+        return this.selectedAnswers;
     }
 }
