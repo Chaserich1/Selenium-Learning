@@ -18,10 +18,4 @@ public class BasePage {
         this.webDriver = webDriver;
         this.wait = new WebDriverWait(webDriver, maxWaitTimeSeconds);
     }
-
-    protected void waitForLoad() {
-        ExpectedCondition<Boolean> pageLoadCondition = driver -> ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
-        wait.until(pageLoadCondition);
-    }
-
 }

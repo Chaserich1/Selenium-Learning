@@ -16,7 +16,6 @@ public class MyPrioritiesHomePage extends BasePage {
         return this;
     }
 
-    //Return void because this will take us to the quiz page which will be a separate class
     public MyPrioritiesHomePage beginQuiz() {
         wait.until(ExpectedConditions.elementToBeClickable(By.id("get-started-button"))).click();
         return this;

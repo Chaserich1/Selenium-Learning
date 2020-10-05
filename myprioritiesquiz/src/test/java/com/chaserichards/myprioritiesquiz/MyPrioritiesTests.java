@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MyPrioritiesTests {
@@ -112,10 +113,10 @@ public class MyPrioritiesTests {
         Thread.sleep(2000);
     }
 
-    @Test(description = "Test to check the order of results on result page")
+    @Test(enabled = false, description = "Test to check the order of results on result page")
     void checkTestResultOrder() throws InterruptedException {
         //Arrange
-        HashMap<String, Integer> selectedAnswers;
+        Map<String, Integer> selectedAnswers;
 
         //Act
         selectedAnswers = homePage

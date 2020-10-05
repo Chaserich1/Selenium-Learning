@@ -16,7 +16,7 @@ public class MyPrioritiesQuizPage extends BasePage {
     public MyPrioritiesQuizPage(WebDriver webDriver) { super(webDriver); }
 
     private List<String> cardList = new ArrayList<String>();
-    private HashMap<String, Integer> selectedAnswers = new HashMap<>();
+    private Map<String, Integer> selectedAnswers = new HashMap<String, Integer>();
 
     //Choose a random card on each page of the quiz until the end if no random value passed in
     public MyPrioritiesQuizPage chooseAnswer() {
@@ -84,7 +84,7 @@ public class MyPrioritiesQuizPage extends BasePage {
     }
 
     //Getter for the hashmap that stored the selections and number of times they were selected
-    public HashMap<String, Integer> getCardSelectionFrequencies() {
+    public Map<String, Integer> getCardSelectionFrequencies() {
         for(Map.Entry m : selectedAnswers.entrySet()) {
             System.out.println(m.getKey() + " " + m.getValue());
         }
@@ -92,7 +92,7 @@ public class MyPrioritiesQuizPage extends BasePage {
     }
 
     //Getter for the hashmap of selected answers
-    public HashMap<String, Integer> getSelectedAnswers() {
+    public Map<String, Integer> getSelectedAnswers() {
         return this.selectedAnswers;
     }
 }
