@@ -7,4 +7,6 @@ public class TopTotalBudgetCalc extends BasePage {
     public TopTotalBudgetCalc(WebDriver webDriver) {
         super(webDriver);
     }
+
+
 }
