@@ -2,7 +2,6 @@ package com.chaserichards.budgetapplication.pages.budgetapppages;
 
 import com.chaserichards.budgetapplication.pages.BasePage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class BudgetAppHomePage extends BasePage {
 
