@@ -8,21 +8,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class openWebApp {
-
-    protected WebDriver driver;
-    private BudgetAppHomePage homePage;
-
-    @BeforeTest
-    public void localSetup() {
-        driver = DriverFactory.getWebDriver("chrome");
-        homePage = new BudgetAppHomePage(driver);
-    }
-
-    @AfterTest
-    public void localCleanup() {
-        driver.quit();
-    }
+public class openWebApp extends BaseTestClass{
 
     @Test(description = "Test to navigate to the web application")
     void openWebApplication() throws InterruptedException {
