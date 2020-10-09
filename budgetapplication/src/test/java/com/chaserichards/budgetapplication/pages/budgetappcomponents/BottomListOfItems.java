@@ -30,7 +30,7 @@ public class BottomListOfItems extends BasePage {
         //Add them to the map and return it
         itemDetails.put("type", itemType);
         itemDetails.put("description", itemDesc);
-        itemDetails.put("value", itemValue.substring(2));
+        itemDetails.put("value", itemValue.substring(2)); //Use substring to get rid of the +
 
         return itemDetails;
     }
