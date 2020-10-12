@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
 
 public class addIncomeAndExpense extends BaseTestClass {
     protected MiddleInputItems middleInputSection;
@@ -65,6 +64,7 @@ public class addIncomeAndExpense extends BaseTestClass {
 
     @Test(description = "Test to check the total budget value compared to added incomes and expenses")
     void checkTotalBudget() throws InterruptedException {
+        driver.navigate().refresh();
         //Arrange
         Map<String, String> itemDetails = new HashMap<String, String>();
         Double expectedTotalBudget, actualTotalBudget;
