@@ -5,13 +5,14 @@ import com.chaserichards.budgetapplication.pages.budgetappcomponents.MiddleInput
 import com.chaserichards.budgetapplication.pages.budgetappcomponents.TopTotalBudgetCalc;
 import com.chaserichards.budgetapplication.pages.budgetapppages.BudgetAppHomePage;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class addIncomeAndExpense extends BaseTestClass {
+public class AddIncomeAndExpense extends BaseTestClass {
     protected MiddleInputItems middleInputSection;
     protected BottomListOfItems bottomListSection;
     protected TopTotalBudgetCalc topTotalBudgetCalc;
