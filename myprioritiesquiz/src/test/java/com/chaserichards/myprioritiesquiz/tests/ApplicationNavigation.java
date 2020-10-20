@@ -1,4 +1,4 @@
-package com.chaserichards.myprioritiesquiz;
+package com.chaserichards.myprioritiesquiz.tests;
 
 import com.chaserichards.myprioritiesquiz.pages.mypriorities.MyPrioritiesHomePage;
 import com.chaserichards.myprioritiesquiz.pages.mypriorities.MyPrioritiesQuizPage;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class MyPrioritiesTests {
+public class ApplicationNavigation {
     protected WebDriver driver;
     private MyPrioritiesHomePage homePage;
 
@@ -67,30 +67,6 @@ public class MyPrioritiesTests {
         Thread.sleep(2000);
     }
 
-    @Test(description = "Test to confirm change previous answer button works")
-    void changePreviousAnswerButton() throws InterruptedException {
-        //Arrange
-        var randomQuestion = ThreadLocalRandom.current().nextInt(2, 26);
-        List<String> cardList;
-
-        //Act
-        cardList = homePage
-                .navigateToMyPriorHomePage()
-                .beginQuiz()
-                .goToQuizPage()
-                .chooseAnswer(randomQuestion)
-                .storeCurrentCards()
-                .chooseAnswer(1)
-                .changePreviousAnswer()
-                .storeCurrentCards()
-                .getCardList();
-
-        //Assert - thinking of ways this could be improved
-        Assert.assertTrue(cardList.get(0).equals(cardList.get(2)) && cardList.get(1).equals(cardList.get(3)));
-
-        Thread.sleep(2000);
-    }
-
     @Test(description = "Test to confirm restart quiz button on results page, restarts the quiz")
     void restartQuizSuccessful() throws InterruptedException {
         //Arrange
@@ -111,22 +87,6 @@ public class MyPrioritiesTests {
         Assert.assertEquals(expectedURL, driver.getCurrentUrl());
 
         Thread.sleep(2000);
-    }
-
-    @Test(enabled = false, description = "Test to check the order of results on result page")
-    void checkTestResultOrder() throws InterruptedException {
-        //Arrange
-        Map<String, Integer> selectedAnswers;
-
-        //Act
-        selectedAnswers = homePage
-                .navigateToMyPriorHomePage()
-                .beginQuiz()
-                .goToQuizPage()
-                .chooseAnswer()
-                .getCardSelectionFrequencies();
-        Thread.sleep(2000);
-
     }
 }
 

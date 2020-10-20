@@ -5,7 +5,7 @@
 
     <test name = "AllTests">
         <classes>
-            <class name = "com.chaserichards.myprioritiesquiz.MyPrioritiesTests" />
+            <class name = "com.chaserichards.myprioritiesquiz.tests.ApplicationNavigation" />
         </classes>
     </test>
 
