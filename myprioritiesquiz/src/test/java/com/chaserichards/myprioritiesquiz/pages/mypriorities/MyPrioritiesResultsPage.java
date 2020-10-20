@@ -35,13 +35,13 @@ public class MyPrioritiesResultsPage extends BasePage {
     }
 
     public Boolean isFileDownloaded(String downloadPath, String fileName) {
-        File dir = new File(downloadPath);
-        File[] dirContents = dir.listFiles();
+        File directory = new File(downloadPath);
+        File[] directoryContents = directory.listFiles();
 
-        for (int i = 0; i < dirContents.length; i++) {
-            if (dirContents[i].getName().equals(fileName)) {
-                // File has been found, it can now be deleted:
-                dirContents[i].delete();
+        for (int i = 0; i < directoryContents.length; i++) {
+            if (directoryContents[i].getName().equals(fileName)) {
+                //Found the file, delete so it is not already there on the next test run
+                directoryContents[i].delete();
                 return true;
             }
         }

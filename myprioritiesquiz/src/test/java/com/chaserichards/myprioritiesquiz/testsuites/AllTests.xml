@@ -3,9 +3,27 @@
 
 <suite name = "AllTests">
 
-    <test name = "AllTests">
+    <test name = "ApplicationNavigation">
         <classes>
             <class name = "com.chaserichards.myprioritiesquiz.tests.ApplicationNavigation" />
+        </classes>
+    </test>
+
+    <test name = "ChangePreviousAnswer">
+        <classes>
+            <class name = "com.chaserichards.myprioritiesquiz.tests.ChangePreviousAnswer" />
+        </classes>
+    </test>
+
+    <test name = "CheckResultsOrder">
+        <classes>
+            <class name = "com.chaserichards.myprioritiesquiz.tests.CheckResultsOrder" />
+        </classes>
+    </test>
+
+    <test name = "FileDownloadVerification">
+        <classes>
+            <class name = "com.chaserichards.myprioritiesquiz.tests.FileDownloadVerification" />
         </classes>
     </test>
 
