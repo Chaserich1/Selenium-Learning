@@ -16,6 +16,7 @@ public class DeleteIncomesAndExpenses extends BaseTestClass{
     protected MiddleInputItems middleInputSection;
     protected BottomListOfItems bottomListSection;
     protected TopTotalBudgetCalc topTotalBudgetCalc;
+    protected Map<String, String> item;
 
     @BeforeTest
     public void localSetup() {
@@ -23,26 +24,43 @@ public class DeleteIncomesAndExpenses extends BaseTestClass{
         middleInputSection = new MiddleInputItems(driver);
         bottomListSection = new BottomListOfItems(driver);
         topTotalBudgetCalc = new TopTotalBudgetCalc(driver);
+        item = new HashMap<>();
     }
 
     @Test(description="Test to confirm incomes and expenses can be removed successfully")
-    void deleteIncomesAndExpenses() throws InterruptedException {
+    void deleteIncome() throws InterruptedException {
         //Arrange
-        var type = (Math.random() <= 0.5) ? "+" : "-";
-        Map<String, String> item = new HashMap<>();
-        item.put("type", type);
+        item.put("type", "+");
         item.put("description", "TestItem");
         item.put("value", "10");
 
         //Act
-        middleInputSection.addItem(type, "TestItem", "10");
-        bottomListSection.deleteItemFromList(type);
+        middleInputSection.addItem(item.get("type"), item.get("description"), item.get("value"));
+        bottomListSection.deleteItemFromList("+");
         var itemFound = bottomListSection.checkForItemInList(item);
 
         //Assert
         Assert.assertFalse(itemFound);
 
-        Thread.sleep(5000);
+        Thread.sleep(2000);
+    }
+
+    @Test(description = "Test to confirm expenses can be removed")
+    void deleteExpense() throws InterruptedException {
+        //Arrange
+        item.put("type", "+");
+        item.put("description", "TestItem");
+        item.put("value", "10");
+
+        //Act
+        middleInputSection.addItem(item.get("type"), item.get("description"), item.get("value"));
+        bottomListSection.deleteItemFromList("+");
+        var itemFound = bottomListSection.checkForItemInList(item);
+
+        //Assert
+        Assert.assertFalse(itemFound);
+
+        Thread.sleep(2000);
     }
 
 }

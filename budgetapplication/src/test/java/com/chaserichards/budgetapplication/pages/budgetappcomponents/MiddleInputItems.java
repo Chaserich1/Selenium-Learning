@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MiddleInputItems extends BasePage {
@@ -28,6 +30,36 @@ public class MiddleInputItems extends BasePage {
 
         submitItem();
         return type;
+    }
+
+    public void addIncome() {
+        Select dropDownList = new Select(webDriver.findElement(By.className("add__type")));
+        //Generate random value of either + or -
+        var type = "+";
+        dropDownList.selectByVisibleText(type);
+        var randomValue = ThreadLocalRandom.current().nextInt(2, 100);
+        String randomValueAsString = Integer.toString(randomValue);
+        randomValueAsString += ".00";
+
+        webDriver.findElement(By.className("add__description")).sendKeys("Default");
+        webDriver.findElement(By.className("add__value")).sendKeys(randomValueAsString);
+
+        submitItem();
+    }
+
+    public void addExpense() {
+        Select dropDownList = new Select(webDriver.findElement(By.className("add__type")));
+        //Generate random value of either + or -
+        var type = "-";
+        dropDownList.selectByVisibleText(type);
+        var randomValue = ThreadLocalRandom.current().nextInt(2, 100);
+        String randomValueAsString = Integer.toString(randomValue);
+        randomValueAsString += ".00";
+
+        webDriver.findElement(By.className("add__description")).sendKeys("Default");
+        webDriver.findElement(By.className("add__value")).sendKeys(randomValueAsString);
+
+        submitItem();
     }
 
     //Overload method to add an item with specific values

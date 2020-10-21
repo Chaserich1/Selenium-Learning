@@ -4,7 +4,6 @@ import com.chaserichards.budgetapplication.pages.budgetappcomponents.BottomListO
 import com.chaserichards.budgetapplication.pages.budgetappcomponents.MiddleInputItems;
 import com.chaserichards.budgetapplication.pages.budgetappcomponents.TopTotalBudgetCalc;
 import com.chaserichards.budgetapplication.pages.budgetapppages.BudgetAppHomePage;
-import org.jsoup.Connection;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -12,7 +11,7 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddIncomeToTotalBudget extends BaseTestClass {
+public class PercentageCalculation extends BaseTestClass{
 
     protected MiddleInputItems middleInputSection;
     protected BottomListOfItems bottomListSection;
@@ -26,22 +25,26 @@ public class AddIncomeToTotalBudget extends BaseTestClass {
         topTotalBudgetCalc = new TopTotalBudgetCalc(driver);
     }
 
-    @Test(description = "Test to check the total budget value compared to added incomes and expenses")
-    void checkTotalBudgetWithIncome() throws InterruptedException {
-        driver.navigate().refresh();
-        //Arrange
-        Map<String, String> itemDetails = new HashMap<String, String>();
-        Double expectedTotalBudget, actualTotalBudget;
+    @Test(description = "Add an income and then add an expense checking that the percentage is the expected value")
+    void checkPercentages() {
+        Map<String, Object> allItems = new HashMap<>();
+        Map<String, String> incomeItem = new HashMap<>();
+        Map<String, String> expenseItem = new HashMap<>();
+        String actualPercentage, expectedPercentage;
 
-        //Act
         middleInputSection.addIncome();
-        itemDetails = bottomListSection.getItemFromList("+");
-        expectedTotalBudget = Double.parseDouble(itemDetails.get("value"));
-        actualTotalBudget = topTotalBudgetCalc.getTotalBudget();
+        middleInputSection.addExpense();
+        incomeItem = bottomListSection.getItemFromList("+");
+        expenseItem = bottomListSection.getItemFromList("-");
+        allItems.put("incomes", incomeItem);
+        allItems.put("expenses", expenseItem);
 
-        //Assert
-        Assert.assertEquals(expectedTotalBudget, actualTotalBudget);
+        //Get the percentage being displayed
+        actualPercentage = expenseItem.get("percentage");
 
-        Thread.sleep(5000);
+        expectedPercentage = bottomListSection.calculateExpectedPercentage(incomeItem.get("value"), expenseItem.get("value"));
+
+        Assert.assertEquals(expectedPercentage, actualPercentage);
     }
+
 }

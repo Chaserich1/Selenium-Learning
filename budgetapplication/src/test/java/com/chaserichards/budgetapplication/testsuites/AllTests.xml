@@ -1,0 +1,42 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name = "AllTests">
+
+    <test name = "AddExpenseToBottomList">
+        <classes>
+            <class name = "com.chaserichards.budgetapplication.tests.AddExpenseToBottomList" />
+        </classes>
+    </test>
+
+    <test name = "AddExpenseToTotalBudget">
+        <classes>
+            <class name = "com.chaserichards.budgetapplication.tests.AddExpenseToTotalBudget" />
+        </classes>
+    </test>
+
+    <test name = "AddIncomeToBottomList">
+        <classes>
+            <class name = "com.chaserichards.budgetapplication.tests.AddIncomeToBottomList" />
+        </classes>
+    </test>
+
+    <test name = "AddIncomeToTotalBudget">
+        <classes>
+            <class name = "com.chaserichards.budgetapplication.tests.AddIncomeToTotalBudget" />
+        </classes>
+    </test>
+
+    <test name = "DeleteIncomesAndExpenses">
+        <classes>
+            <class name = "com.chaserichards.budgetapplication.tests.DeleteIncomesAndExpenses" />
+        </classes>
+    </test>
+
+    <test name = "OpenWebApp">
+        <classes>
+            <class name = "com.chaserichards.budgetapplication.tests.OpenWebApp" />
+        </classes>
+    </test>
+
+</suite>

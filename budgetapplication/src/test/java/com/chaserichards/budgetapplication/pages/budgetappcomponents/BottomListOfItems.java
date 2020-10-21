@@ -18,7 +18,7 @@ public class BottomListOfItems extends BasePage {
 
     public Map<String, String> getItemFromList(String itemType) {
         Map<String, String> itemDetails = new HashMap<String, String>();
-        String itemDesc, itemValue;
+        String itemDesc, itemValue, itemPercentage;
 
         if(itemType == "+") {
             //Get the values from the UI
@@ -28,6 +28,8 @@ public class BottomListOfItems extends BasePage {
             //Get the values from the UI
             itemDesc = webDriver.findElement(By.xpath("//div[@id='exp-0']//div[@class='item__description']")).getText();
             itemValue = webDriver.findElement(By.xpath("//div[@id='exp-0']//div['right clearfix']//div[@class='item__value']")).getText();
+            itemPercentage = webDriver.findElement(By.xpath("//div[@id='exp-0']//div[@class='item__percentage']")).getText();
+            itemDetails.put("percentage", itemPercentage);
         }
 
         //Add them to the map and return it
@@ -82,5 +84,18 @@ public class BottomListOfItems extends BasePage {
                 return false;
             }
         }
+    }
+
+    public String calculateExpectedPercentage(String incomeAsString, String expenseAsString) {
+        String percentageAsString;
+        double incomeDouble, expenseDouble, percentageDouble;
+
+        incomeDouble = Double.parseDouble(incomeAsString);
+        expenseDouble = Double.parseDouble(expenseAsString);
+
+        percentageDouble = Math.round((expenseDouble / incomeDouble) * 100);
+        percentageAsString = String.valueOf((int) percentageDouble);
+
+        return percentageAsString + "%";
     }
 }

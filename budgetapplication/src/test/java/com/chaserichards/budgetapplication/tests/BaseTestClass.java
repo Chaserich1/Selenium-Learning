@@ -10,13 +10,14 @@ public class BaseTestClass {
     protected WebDriver driver;
     protected BudgetAppHomePage homePage;
 
-    @BeforeSuite
+    /*@BeforeSuite
     public void globalSetup() {
         driver = DriverFactory.getWebDriver("chrome");
-    }
+    }*/
 
     @BeforeTest
     public void goToHomePage() {
+        driver = DriverFactory.getWebDriver("chrome");
         driver.get("file:///C:/Users/cnr1103/GithubRepos/Selenium-Learning/budgetapplication/src/main/java/com/chaserichards/budgetapplication/index.html");
     }
 
