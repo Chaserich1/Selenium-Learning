@@ -27,10 +27,14 @@ public class MyPrioritiesResultsPage extends BasePage {
         return this;
     }
 
-    public MyPrioritiesResultsPage downloadResults() throws InterruptedException {
+    public MyPrioritiesResultsPage downloadResults(String webBrowser) throws InterruptedException {
         Thread.sleep(2000);
         wait.until(ExpectedConditions.elementToBeClickable(By.id("download-button"))).click();
         Thread.sleep(2000);
+        //If firefox need to click save on dialog box
+        /*if(webBrowser == "firefox") {
+
+        }*/
         return this;
     }
 

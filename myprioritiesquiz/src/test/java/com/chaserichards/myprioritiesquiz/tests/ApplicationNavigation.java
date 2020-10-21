@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static org.testng.Assert.assertEquals;
+
 public class ApplicationNavigation {
     protected WebDriver driver;
     private MyPrioritiesHomePage homePage;
@@ -42,7 +44,7 @@ public class ApplicationNavigation {
                 .beginQuiz();
 
         //Assert
-        Assert.assertEquals(expectedURl, driver.getCurrentUrl());
+        assertEquals(expectedURl, driver.getCurrentUrl());
 
         Thread.sleep(2000);
     }
@@ -62,7 +64,7 @@ public class ApplicationNavigation {
                 .onResultsPage();
 
         //Assert
-        Assert.assertEquals(expectedURL, driver.getCurrentUrl());
+        assertEquals(expectedURL, driver.getCurrentUrl());
 
         Thread.sleep(2000);
     }
@@ -84,7 +86,7 @@ public class ApplicationNavigation {
                 .goToHomePage();
 
         //Assert
-        Assert.assertEquals(expectedURL, driver.getCurrentUrl());
+        assertEquals(expectedURL, driver.getCurrentUrl());
 
         Thread.sleep(2000);
     }

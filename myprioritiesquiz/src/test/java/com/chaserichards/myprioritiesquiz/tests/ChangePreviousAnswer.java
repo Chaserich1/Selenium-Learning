@@ -9,6 +9,9 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.Random;
+
+import static org.testng.Assert.assertTrue;
 
 public class ChangePreviousAnswer {
 
@@ -31,7 +34,8 @@ public class ChangePreviousAnswer {
     @Test(description = "Test to confirm change previous answer button works")
     void changePreviousAnswerButton() throws InterruptedException {
         //Arrange
-        var randomQuestion = 4;
+        Random r = new Random();
+        var randomQuestion = r.nextInt(26 - 2) + 2;
         List<String> cardList;
 
         //Act
@@ -47,7 +51,7 @@ public class ChangePreviousAnswer {
                 .getCardList();
 
         //Assert - thinking of ways this could be improved
-        Assert.assertTrue(cardList.get(0).equals(cardList.get(2)) && cardList.get(1).equals(cardList.get(3)));
+        assertTrue(cardList.get(0).equals(cardList.get(2)) && cardList.get(1).equals(cardList.get(3)));
 
         Thread.sleep(2000);
     }
