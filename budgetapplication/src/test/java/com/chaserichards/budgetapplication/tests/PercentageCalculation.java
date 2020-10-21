@@ -26,11 +26,11 @@ public class PercentageCalculation extends BaseTestClass{
     }
 
     @Test(description = "Add an income and then add an expense checking that the percentage is the expected value")
-    void checkPercentages() {
+    void checkBottomPercentages() {
         Map<String, Object> allItems = new HashMap<>();
         Map<String, String> incomeItem = new HashMap<>();
         Map<String, String> expenseItem = new HashMap<>();
-        String actualPercentage, expectedPercentage;
+        String actualBottomPercentage, expectedPercentage;
 
         middleInputSection.addIncome();
         middleInputSection.addExpense();
@@ -40,11 +40,33 @@ public class PercentageCalculation extends BaseTestClass{
         allItems.put("expenses", expenseItem);
 
         //Get the percentage being displayed
-        actualPercentage = expenseItem.get("percentage");
+        actualBottomPercentage = expenseItem.get("percentage");
 
         expectedPercentage = bottomListSection.calculateExpectedPercentage(incomeItem.get("value"), expenseItem.get("value"));
 
-        Assert.assertEquals(expectedPercentage, actualPercentage);
+        Assert.assertEquals(expectedPercentage, actualBottomPercentage);
+    }
+
+    @Test(description = "Add an income and then add an expense checking that the percentage is the expected value")
+    void checkTopPercentages() {
+        Map<String, Object> allItems = new HashMap<>();
+        Map<String, String> incomeItem = new HashMap<>();
+        Map<String, String> expenseItem = new HashMap<>();
+        String actualTotalExpensePercentage, expectedPercentage;
+
+        middleInputSection.addIncome();
+        middleInputSection.addExpense();
+        incomeItem = bottomListSection.getItemFromList("+");
+        expenseItem = bottomListSection.getItemFromList("-");
+        allItems.put("incomes", incomeItem);
+        allItems.put("expenses", expenseItem);
+
+        //Get the percentage being displayed
+        actualTotalExpensePercentage = topTotalBudgetCalc.getTotalExpensesPercentage();
+
+        expectedPercentage = topTotalBudgetCalc.calculateTotalExpensePercentage();
+
+        Assert.assertEquals(expectedPercentage, actualTotalExpensePercentage);
     }
 
 }

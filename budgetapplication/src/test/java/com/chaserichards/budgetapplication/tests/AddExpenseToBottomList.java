@@ -26,9 +26,10 @@ public class AddExpenseToBottomList extends BaseTestClass {
     }
 
     @Test(description="Test to confirm successful addition of expense")
-    void addExpenseToBottomList() throws InterruptedException {
+    void addExpenseToBottomList() {
         //Arrange
         Map<String, String> expectedItemDetails = new HashMap<String, String>();
+        expectedItemDetails.put("percentage", "---");
         expectedItemDetails.put("type", "-");
         expectedItemDetails.put("description", "Food");
         expectedItemDetails.put("value", "14.75");
@@ -41,6 +42,5 @@ public class AddExpenseToBottomList extends BaseTestClass {
 
         //Assert
         Assert.assertTrue(expectedItemDetails.equals(actualItemDetails));
-        Thread.sleep(2000);
     }
 }

@@ -14,4 +14,32 @@ public class TopTotalBudgetCalc extends BasePage {
         double totalBudgetAsDouble = Double.parseDouble(totalBudgetAsString.substring(2));
         return totalBudgetAsDouble;
     }
+
+    public String getTotalExpensesPercentage() {
+        String totalPercentageAsString = webDriver.findElement(By.className("budget__expenses--percentage")).getText();
+        return totalPercentageAsString;
+    }
+
+    public Double getTotalIncomeBudget () {
+        var totalIncomeBudgetAsString = webDriver.findElement(By.className("budget__income--value")).getText();
+        var totalIncomeBudgetDouble = Double.parseDouble(totalIncomeBudgetAsString.substring(2));
+        return totalIncomeBudgetDouble;
+    }
+
+    public Double getTotalExpenseBudget () {
+        var totalExpenseBudgetAsString = webDriver.findElement(By.className("budget__expenses--value")).getText();
+        var totalExpenseBudgetDouble = Double.parseDouble(totalExpenseBudgetAsString.substring(2));
+        return totalExpenseBudgetDouble;
+    }
+
+    public String calculateTotalExpensePercentage () {
+        Double totalIncomeBudget, totalExpenseBudget;
+        totalIncomeBudget = getTotalIncomeBudget();
+        totalExpenseBudget = getTotalExpenseBudget();
+
+        var totalExpensePercentage = Math.round((totalExpenseBudget / totalIncomeBudget) * 100);
+        var totalExpensePercentageAsString = String.valueOf((int) totalExpensePercentage);
+
+        return totalExpensePercentageAsString + "%";
+    }
 }

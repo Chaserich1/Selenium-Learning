@@ -41,7 +41,5 @@ public class AddIncomeToTotalBudget extends BaseTestClass {
 
         //Assert
         Assert.assertEquals(expectedTotalBudget, actualTotalBudget);
-
-        Thread.sleep(5000);
     }
 }

@@ -3,6 +3,13 @@
 
 <suite name = "AllTests">
 
+
+    <test name = "OpenWebApp">
+        <classes>
+            <class name = "com.chaserichards.budgetapplication.tests.OpenWebApp" />
+        </classes>
+    </test>
+
     <test name = "AddExpenseToBottomList">
         <classes>
             <class name = "com.chaserichards.budgetapplication.tests.AddExpenseToBottomList" />
@@ -33,9 +40,9 @@
         </classes>
     </test>
 
-    <test name = "OpenWebApp">
+    <test name = "PercentageCalculation">
         <classes>
-            <class name = "com.chaserichards.budgetapplication.tests.OpenWebApp" />
+            <class name = "com.chaserichards.budgetapplication.tests.PercentageCalculation" />
         </classes>
     </test>
 

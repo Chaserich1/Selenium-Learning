@@ -41,8 +41,6 @@ public class DeleteIncomesAndExpenses extends BaseTestClass{
 
         //Assert
         Assert.assertFalse(itemFound);
-
-        Thread.sleep(2000);
     }
 
     @Test(description = "Test to confirm expenses can be removed")
@@ -59,8 +57,6 @@ public class DeleteIncomesAndExpenses extends BaseTestClass{
 
         //Assert
         Assert.assertFalse(itemFound);
-
-        Thread.sleep(2000);
     }
 
 }

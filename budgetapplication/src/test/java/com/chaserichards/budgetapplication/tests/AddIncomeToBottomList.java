@@ -41,6 +41,5 @@ public class AddIncomeToBottomList extends BaseTestClass {
 
         //Assert
         Assert.assertTrue(expectedItemDetails.equals(actualItemDetails));
-        Thread.sleep(2000);
     }
 }
