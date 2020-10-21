@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.testng.Assert.assertEquals;
+
 public class AddIncomeToTotalBudget extends BaseTestClass {
 
     protected MiddleInputItems middleInputSection;
@@ -40,6 +42,6 @@ public class AddIncomeToTotalBudget extends BaseTestClass {
         actualTotalBudget = topTotalBudgetCalc.getTotalBudget();
 
         //Assert
-        Assert.assertEquals(expectedTotalBudget, actualTotalBudget);
+        assertEquals(expectedTotalBudget, actualTotalBudget);
     }
 }

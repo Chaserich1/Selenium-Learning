@@ -11,6 +11,8 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.testng.Assert.assertFalse;
+
 public class DeleteIncomesAndExpenses extends BaseTestClass{
 
     protected MiddleInputItems middleInputSection;
@@ -40,7 +42,7 @@ public class DeleteIncomesAndExpenses extends BaseTestClass{
         var itemFound = bottomListSection.checkForItemInList(item);
 
         //Assert
-        Assert.assertFalse(itemFound);
+        assertFalse(itemFound);
     }
 
     @Test(description = "Test to confirm expenses can be removed")
@@ -56,7 +58,7 @@ public class DeleteIncomesAndExpenses extends BaseTestClass{
         var itemFound = bottomListSection.checkForItemInList(item);
 
         //Assert
-        Assert.assertFalse(itemFound);
+        assertFalse(itemFound);
     }
 
 }

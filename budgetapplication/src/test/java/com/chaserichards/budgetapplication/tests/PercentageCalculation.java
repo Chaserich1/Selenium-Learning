@@ -11,6 +11,8 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.testng.Assert.assertEquals;
+
 public class PercentageCalculation extends BaseTestClass{
 
     protected MiddleInputItems middleInputSection;
@@ -44,7 +46,7 @@ public class PercentageCalculation extends BaseTestClass{
 
         expectedPercentage = bottomListSection.calculateExpectedPercentage(incomeItem.get("value"), expenseItem.get("value"));
 
-        Assert.assertEquals(expectedPercentage, actualBottomPercentage);
+        assertEquals(expectedPercentage, actualBottomPercentage);
     }
 
     @Test(description = "Add an income and then add an expense checking that the percentage is the expected value")
@@ -66,7 +68,7 @@ public class PercentageCalculation extends BaseTestClass{
 
         expectedPercentage = topTotalBudgetCalc.calculateTotalExpensePercentage();
 
-        Assert.assertEquals(expectedPercentage, actualTotalExpensePercentage);
+        assertEquals(expectedPercentage, actualTotalExpensePercentage);
     }
 
 }

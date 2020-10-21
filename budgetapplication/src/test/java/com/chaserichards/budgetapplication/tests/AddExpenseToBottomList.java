@@ -11,6 +11,8 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.testng.Assert.assertTrue;
+
 public class AddExpenseToBottomList extends BaseTestClass {
 
     protected MiddleInputItems middleInputSection;
@@ -41,6 +43,6 @@ public class AddExpenseToBottomList extends BaseTestClass {
         actualItemDetails = bottomListSection.getItemFromList(expectedItemDetails.get("type"));
 
         //Assert
-        Assert.assertTrue(expectedItemDetails.equals(actualItemDetails));
+        assertTrue(expectedItemDetails.equals(actualItemDetails));
     }
 }

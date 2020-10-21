@@ -14,6 +14,8 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.testng.Assert.assertEquals;
+
 public class OpenWebApp extends BaseTestClass{
 
     @BeforeTest
@@ -30,7 +32,7 @@ public class OpenWebApp extends BaseTestClass{
         homePage.navigateToBudgetAppHomePage();
 
         //Assert
-        Assert.assertEquals(expectedTitle, driver.getTitle());
+        assertEquals(expectedTitle, driver.getTitle());
 
         Thread.sleep(2000);
     }
