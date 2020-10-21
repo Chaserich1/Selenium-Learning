@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static org.testng.Assert.assertEquals;
+
 public class Get200 extends BaseTestClass{
 
     CloseableHttpClient client;
@@ -37,7 +39,7 @@ public class Get200 extends BaseTestClass{
 
         int actualStatus = response.getStatusLine().getStatusCode();
 
-        Assert.assertEquals(actualStatus, 200);
+        assertEquals(actualStatus, 200);
     }
 
     @Test
@@ -49,7 +51,7 @@ public class Get200 extends BaseTestClass{
 
         int actualStatus = response.getStatusLine().getStatusCode();
 
-        Assert.assertEquals(actualStatus, 200);
+        assertEquals(actualStatus, 200);
     }
 
     @Test
@@ -61,6 +63,6 @@ public class Get200 extends BaseTestClass{
 
         int actualStatus = response.getStatusLine().getStatusCode();
 
-        Assert.assertEquals(actualStatus, 200);
+        assertEquals(actualStatus, 200);
     }
 }

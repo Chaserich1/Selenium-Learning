@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static org.testng.Assert.assertEquals;
+
 public class Get401 extends BaseTestClass{
 
     CloseableHttpClient client;
@@ -34,7 +36,7 @@ public class Get401 extends BaseTestClass{
 
         int actualStatus = response.getStatusLine().getStatusCode();
 
-        Assert.assertEquals(actualStatus, 401);
+        assertEquals(actualStatus, 401);
     }
 
     @Test
@@ -46,7 +48,7 @@ public class Get401 extends BaseTestClass{
 
         int actualStatus = response.getStatusLine().getStatusCode();
 
-        Assert.assertEquals(actualStatus, 401);
+        assertEquals(actualStatus, 401);
     }
 
     @Test
@@ -58,6 +60,6 @@ public class Get401 extends BaseTestClass{
 
         int actualStatus = response.getStatusLine().getStatusCode();
 
-        Assert.assertEquals(actualStatus, 401);
+        assertEquals(actualStatus, 401);
     }
 }
