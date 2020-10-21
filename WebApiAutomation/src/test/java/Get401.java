@@ -1,10 +1,7 @@
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.junit.After;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -12,7 +9,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class Get200 extends BaseTestClass{
+public class Get401 extends BaseTestClass{
 
     CloseableHttpClient client;
     CloseableHttpResponse response;
@@ -29,38 +26,38 @@ public class Get200 extends BaseTestClass{
     }
 
     @Test
-    public void baseUrlReturns200() throws IOException {
+    public void userReturns401() throws IOException {
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT);
+        HttpGet get = new HttpGet(BASE_ENDPOINT + "/user");
 
         response = client.execute(get);
 
         int actualStatus = response.getStatusLine().getStatusCode();
 
-        Assert.assertEquals(actualStatus, 200);
+        Assert.assertEquals(actualStatus, 401);
     }
 
     @Test
-    public void rateLimitReturns200() throws IOException {
+    public void userFollowersReturns401() throws IOException {
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/rate_limit");
+        HttpGet get = new HttpGet(BASE_ENDPOINT + "/user/followers");
 
         response = client.execute(get);
 
         int actualStatus = response.getStatusLine().getStatusCode();
 
-        Assert.assertEquals(actualStatus, 200);
+        Assert.assertEquals(actualStatus, 401);
     }
 
     @Test
-    public void searchReposReturns200() throws IOException {
+    public void notificationsReturns401() throws IOException {
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/search/repositories?q=java");
+        HttpGet get = new HttpGet(BASE_ENDPOINT + "/notifications");
 
         response = client.execute(get);
 
         int actualStatus = response.getStatusLine().getStatusCode();
 
-        Assert.assertEquals(actualStatus, 200);
+        Assert.assertEquals(actualStatus, 401);
     }
 }
