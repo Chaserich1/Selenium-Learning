@@ -14,20 +14,6 @@ import static org.testng.Assert.assertEquals;
 
 public class Get401 extends BaseTestClass{
 
-    CloseableHttpClient client;
-    CloseableHttpResponse response;
-
-    @BeforeMethod
-    public void setup() {
-        client = HttpClientBuilder.create().build();
-    }
-
-    @AfterMethod
-    public void cleanup() throws IOException {
-        client.close();
-        response.close();
-    }
-
     @DataProvider
     private Object[][] endpoints() {
         return new Object[][] {

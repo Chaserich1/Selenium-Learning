@@ -16,20 +16,6 @@ import static org.testng.Assert.assertEquals;
 
 public class Get200 extends BaseTestClass{
 
-    CloseableHttpClient client;
-    CloseableHttpResponse response;
-
-    @BeforeMethod
-    public void setup() {
-        client = HttpClientBuilder.create().build();
-    }
-
-    @AfterMethod
-    public void cleanup() throws IOException {
-        client.close();
-        response.close();
-    }
-
     @Test
     public void baseUrlReturns200() throws IOException {
 
