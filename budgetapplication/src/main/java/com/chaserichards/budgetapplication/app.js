@@ -385,6 +385,8 @@ var controller = (function(budgetCtrl, UICtrl) {
 
             // 6. Calculate and update percentages
             updatePercentages();
+        } else {
+            alert("Need to enter all necessary fields");
         }
 
     };
